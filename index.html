@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hopebebetter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: rotateY(0deg); }
+      to { opacity: 0; transform: rotateY(90deg); }
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('/static/sincan.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 40px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      line-height: 1.8;
+    }
+    .page {
+      display: none;
+      max-width: 700px;
+      margin: auto;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      transform-origin: left;
+    }
+    .active {
+      display: block;
+      animation: fadeIn 0.6s ease-in;
+    }
+    .fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+    .nav-button {
+      position: fixed;
+      top: 50%;
+      background-color: white;
+      color: black;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
+    button.big {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+    img.centered-img {
+      max-width: 300px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 90%;
+      height: 100px;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music (utama) -->
+  <audio id="bgAudio" loop>
+    <source src="/static/too_good.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Background Music khusus halaman 9 -->
+  <audio id="altAudio">
+    <source src="/static/love_lesson_skyline.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Suara efek buku -->
+  <audio id="flipSound">
+    <source src="/static/page-turn.mp3" type="audio/mpeg">
+  </audio>
+
+  <button onclick="playMusic()" class="big">▶️ Play Lagu</button>
+
+  <!-- Navigasi -->
+  <button class="nav-button" id="prevBtn" onclick="changePage(-1)">←</button>
+  <button class="nav-button" id="nextBtn" onclick="changePage(1)">→</button>
+
+    <!-- Halaman konten -->
+  <div class="page active">
+    <h1>hai be!</h1>
+    <b>sebelum kamu mulai scroll, aku mau kasih tau dikit</b><br>
+      di halaman ini ada lagu yang aku pasang buat nemenin kamu baca,<br>
+      jangan lupa untuk kamu klik dulu lagunya yaa 🔉<br><br>
+  </div>
+
+  <div class="page">
+    <b>sebelumnya aku mau cerita sedikit, aku buat project ini semingguan lebih kayaknya</b><br><br>
+    dari yang banyak error, satu layar tiba-tiba jadi hitam, lagu nya kadang ga muncul, laptopku sampe overheat, aku tiba tiba drop 2 hari, mencret juga wkwkw dll. <br>
+    tapi itulah yang dinamakan totalitas aku benerin semuanya dan alhamdulillah pas banget di hari rabu malem jam menunjukkan 20.00 <br>
+    sesuai target awal aku buat project ini <br><br>
+    ini aku buat ungkapin isi hati satu sama lain aja biar kamu ga bosan, aku luangin waktuku buat bikin ini <br><br>
+    maaf ya kalo kesannya masi jelek, i try my best of the best to make it, trust me huhu..<br><br>
+    sebenernya sih program ini udah jadi dari kemarin kemarin, <br> 
+    cuman nih aku revisi ulang karena sebelumnya background nya tuh dinosaurus banyak gitu wkwk <br>
+    akhirnya aku ganti jadi sincan biar sesuai kesukaanmu <br><br>
+    <b>enjoyy! hope u like it!</b>
+  </div>
+
+  <div class="page">
+    <img src="/static/something.jpg" class="centered-img">
+    <br>kamu masih inget ga ini pap yang kamu kirim ke aku tanggal 1 Maret pada saat itu?</b><br>
+      kamu pap es krim ini, dan aku notice sampe aku simpen baik-baik <br><br>
+      pas kita ketemu di bandung day 1 aku beliin es krim itu ke kamu 🍦<br> (dua malah! beda rasa tapi hehe)
+      sayangnya ga sempet kamu makan ya karena keburu mencair, gapapa kok!<br>
+  </div>
+
+  <div class="page">
+    <img src="/static/try.png" class="centered-img">
+    <br>be tau ga...</b><br>
+    setiap kita salah paham atau ada yang bikin kamu sedih, aku selalu catet itu <br>
+    biar aku bisa belajar, inget, dan ga ngulangin kesalahan yang sama<br><br>
+    aku minta maaf atas semua kondisi yang bikin kita sekarang ga sejalan<br>
+    maaf aku masih banyak salahnya ke kamu 
+  </div>
+
+  <div class="page">
+    <img src="/static/dongeng.png" class="centered-img">
+    <br>sekarang hal yang paling aku tunggu tiap malam itu dongengin kamu</b><br>
+    kadang tuh aku mikir kamu ni uda gede ya, segala harus dongeng sebelum tidur pake ada acara ngedot susu segala wkwk<br>
+    lucu aja gitu aku kadang kalo keinget kayak toddler kamu<br>
+    tapi tiap kali aku mau dongengin kamu tu, <br> aku selalu catet tau biar ga kelamaan kamu nungguin akunya<br>
+    kalo aku nya ga dongeng dongeng yaaa berarti masih kangen aja aku, peace :D <br>
+        </p>
+  </div>
+
+  <div class="page">
+    aku tau kok, di kondisi kita yang sekarang lagi ga baik-baik aja...<br><br>
+    tapi sebelum aku nyerah, aku mau tau...<br>
+    <b>masih bisa ga ya kita balik seperti dulu?</b><br><br>
+    jujur, aku kangen banget hal itu. <br>
+    aku tau LDR ini bikin kamu bosan, dan aku ngerti kok soal itu. aku juga udah try be, tapi aku gabisa jalan sendiri..<br><br>
+    aku cuma butuh kamu ikut jalan bareng aku <br><br>
+    dengan aku bikin ini, itu juga sebenernya aku mau ungkapin perasaan aku dan kamu juga<br>
+    mungkin conversation yang biasa aku lakukan terbilang bosan di kamu, maka dari itu aku buat ini..<br>
+    kita pernah janji buat belajar jadi lebih baik satu sama lain kan?<br>
+    yuk biasain ngobrolin dulu kalo ada masalah di hari itu, jangan tidur dalam keadaan heavy hearts cause a problem...<br><br>
+    be, pls look at me on last i try for us.. ini mungkin langkah terakhir aku<br>
+    aku masih mau bareng kamu, jatuh bangun sama kamu <br>
+    <b>aku masih mau belajar jadi pria yang baik buat kamu</b><br>
+    masih banyak kota-kota yang harus kita taklukan bareng...<br><br>
+    tapi kalau kamu setelah baca ini semua dari yang aku buat dan ga ada perubahan apapun dari perasaanmu...<br>
+    tak apa, not u're mistake kok. maybe i deserve all the pain and disappointment i am feeling rn.<br><br>
+    i mean it is my fault, i should've done better...
+  </div>
+
+  <div class="page">
+    <img src="/static/wle.jpg" class="centered-img" id="slideImage">
+    <br>terima kasih sekali udah baca sampai akhir ya!</b><br>
+    mantan mu kebetulan anak teknik, jadi ilmunya mau aku salurin kesini <br><br>
+    as always i say, jaga kesehatan mu selalu ya, minum vitaminnya yang rutin!<br>
+    u can text or call me everytime u want, i'll always be here <br>
+    heran dah cakep mulu kamu tiap detik, menit, jam pantes aku ga pernah salah untuk kasih kamu julukan... <b>POAT — Prettiest of All Time 💐</b><br><br>
+    have a nice day ya fighter — <b>Fitriya Rahmah!</b>
+    <p>boleh ga untuk kamu utarain perasaan kamu atau respon kamu deh bebas setelah lihat ini lewat kotak dibawah ini ya! 💌
+    <form id="formFeedback">
+      <textarea name="feeling" placeholder="tulis di sini ya be"></textarea><br>
+      <button type="submit" class="big">Kirim</button>
+    </form>
+  </div>
+
+  <div class="page">
+    <b>malam kemarin saat kita telfon, kamu sempat tanya kenapa aku masih bertahan di sini kan?</b><br><br>
+    sempat beberapa kali aku kecewa, tetapi aku masi meresponmu dengan baik bahkan ngasi kesempatan
+    kamu untuk kesekian kalinya dan berkali kali<br>
+    kalo kamu bertanya kenapa? karna aku ingin membawa kamu keluar dari zona toxic itu yang ngebuat watak mu jadi keras<br><br>
+    kalo kamu bertanya lagi kenapa aku lakuin itu? aku akan jawab bahwa aku gamau melihat seseorang kesesat didalam kegelapan yang 
+    bahkan dia aja gatau harus keluar lewat mana dan dari mana serta harus mulai dari mana<br><br>
+    kalo kamu bertanya mengenai bagaimana perasaan dan keadaan sekarang apa aku capek?, mental?, sakit? 
+    jawabannya pasti <b>iya</b>. tetapi rasanya lebih sakit kalo aku gagal bawa kamu keluar dari zona itu.<br>
+    <b>i'll always try to fix us..<b><br>
+  </div>
+
+  <div class="page">
+    i'm sending u this because i want u to know how truly grateful i am<br>
+    to have met someone as amazing as u and u mean the world to me.<br><br>
+
+    i hope u know how glad i am to have u in my life,<br>
+    and i wish i never have to lose u.<br><br>
+
+    u're incredible, u make me smile and laugh so much.<br>
+    u're my favorite destination, my home. <br><br>
+
+    please don't be too hard on urself, because u're more than enough.<br>
+    i love u so much <br><br>
+
+    <b>remember fit, as long as i'm alive u'll always have someone<br>
+    who's proud of u in everything 🤍</b>
+
+    <br><b>terimakasih sekali lagi kamu udah baca semuanya sampai akhir </b><br><br>
+    aku tau isinya panjang banget, sampe aku bingung sendiri sama program yang aku buat haha<br><br>
+    kalau kamu udah baca semua dan mau nutup halamannya,<br>
+    tinggal klik tombol yang ada di bawah 🫶
+    </p>
+
+  </div>
+
+  <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+    const bgAudio = document.getElementById('bgAudio');
+    const altAudio = document.getElementById('altAudio');
+    const flipSound = document.getElementById('flipSound');
+
+    function playMusic() {
+      bgAudio.play();
+      sessionStorage.setItem("musicStarted", "true");
+    }
+
+    window.addEventListener("DOMContentLoaded", function() {
+      if (sessionStorage.getItem("musicStarted") === "true") {
+        bgAudio.play().catch(() => {});
+      }
+    });
+
+    function showPage(index) {
+      if (index < 0 || index >= pages.length) return;
+
+      pages[currentPage].classList.remove('active');
+      pages[currentPage].classList.add('fade-out');
+
+      setTimeout(() => {
+        pages[currentPage].classList.remove('fade-out');
+        currentPage = index;
+        pages[currentPage].classList.add('active');
+
+        // Suara efek
+        flipSound.play().catch(() => {});
+
+        // Ganti musik kalau di page terakhir
+        if (currentPage === pages.length - 1) {
+          if (!altAudio.played.length) {
+            bgAudio.pause();
+            altAudio.play();
+          }
+        } else {
+          altAudio.pause();
+          if (sessionStorage.getItem("musicStarted") === "true") {
+            bgAudio.play();
+          }
+        }
+      }, 300);
+    }
+
+    function changePage(dir) {
+      showPage(currentPage + dir);
+    }
+  </script>
+</body>
+</html>
